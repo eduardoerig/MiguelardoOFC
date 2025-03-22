@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login - Miguelardo</title>
-  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body class="body_login">
 
   <main class="container_login">
     <!-- Formulário de Login -->
     <section id="loginForm" class="form-container-index active" aria-label="Formulário de Login">
       <div class="image-container">
-        <img src="../imgs/logoBrancoRecortada.png" alt="Logo Miguelardo" />
+        <img src="imgs/logoBrancoRecortada.png" alt="Logo Miguelardo" />
       </div>
       <h2>Login</h2>
       <form onsubmit="login(event)">
@@ -28,15 +31,17 @@
     </section>
 
     <!-- Formulário de Cadastro -->
-    <section id="signupForm" class="form-container-index" aria-label="Formulário de Cadastro">      <div class="image-container">
-        <img src="../imgs/logoBranco.png" alt="Logo Miguelardo" />
+    <section id="signupForm" class="form-container-index" aria-label="Formulário de Cadastro">
+      <div class="image-container">
+        <img src="imgs/logoBranco.png" alt="Logo Miguelardo" />
       </div>
       <h2>Cadastro</h2>
       <form onsubmit="register(event)">
         <input type="text" id="signupName" placeholder="Nome Completo" required aria-label="Nome completo" />
         <input type="email" id="signupEmail" placeholder="Email" required aria-label="Email de cadastro" />
         <input type="password" id="signupPassword" placeholder="Senha" required aria-label="Senha" />
-        <input type="password" id="signupConfirmPassword" placeholder="Confirme a Senha" required aria-label="Confirme a senha" />
+        <input type="password" id="signupConfirmPassword" placeholder="Confirme a Senha" required
+          aria-label="Confirme a senha" />
         <button type="submit">Cadastrar-se</button>
       </form>
       <p class="toggle-link">
@@ -90,7 +95,7 @@
 
       if (loginEmail === storedEmail && loginPassword === storedPassword) {
         alert("Login realizado com sucesso!");
-        window.location.href = "/html/pagina_principal.html";
+        window.location.href = "html/pagina_principal.html";
       } else {
         alert("Email ou senha incorretos!");
       }
@@ -98,4 +103,5 @@
   </script>
 
 </body>
+
 </html>
