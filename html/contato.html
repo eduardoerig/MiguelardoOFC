@@ -4,27 +4,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Miguelardo</title>
+    <title>Miguelardo - Contato</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <body>
 
-    <nav class="navbar">
-        <div class="container">
-            <img class="logo" src="../imgs/logoBrancoRecortada.png" alt="">
+    <header>
+        <nav class="navbar">
+          <div class="container">
+            <img class="logo" src="../imgs/logoBrancoRecortada.png" alt="Logo Miguelardo" />
+            
             <ul class="nav-links">
-                <li><i class="fa-solid fa-house"></i><a href="pagina_principal.html">Home</a></li>
-                <li><i class="fa-solid fa-book"></i><a href="catalogo.html">Catálogo</a></li>
-                <li><i class="fa-solid fa-address-card"></i><a href="sobrenos.html">Sobre Nós</a></li>
-                <li><i class="fa-solid fa-phone"></i><a href="contato.html">Contato</a></li>
+              <li><a href="pagina_principal.html"><i class="fa-solid fa-house"></i> Home</a></li>
+              <li><a href="catalogo.html"><i class="fa-solid fa-book"></i> Catálogo</a></li>
+              <li><a href="sobrenos.html"><i class="fa-solid fa-address-card"></i> Sobre Nós</a></li>
+              <li><a href="contato.html"><i class="fa-solid fa-phone"></i> Contato</a></li>
             </ul>
-            <div class="login-btn">
+            
+            <div class="right-header">
+              <!-- Ícone do Carrinho -->
+              <div class="cart-icon" onclick="abrirCarrinho()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="quantidade-carrinho">0</span>
+              </div>
+      
+              <div class="login-btn">
                 <a href="../index.html">Sair</a>
+              </div>
             </div>
-        </div>
-    </nav>
+          </div>
+        </nav>
+      </header>
+
+      <section class="hero"><h1>CONTATO</h1></section>
 
     <section class="form-container">
         <h2>Formulário de Contato</h2>
@@ -49,7 +63,114 @@
     <footer>
         <p>&copy; 2024 Miguelardo. Todos os direitos reservados.</p>
     </footer>
+    <div id="carrinho-sidebar">
+        <div class="carrinho-header">
+          <h3>Seu Carrinho</h3>
+          <button class="fechar-btn" onclick="fecharCarrinho()">
+            <i class="fa-solid fa-x"></i>
+          </button>
+        </div>
+        <div id="carrinho-itens"></div>
+        <p class="total-carrinho">Total: R$ <span id="carrinho-total">0.00</span></p>
+        <button class="finalizar-btn" onclick="finalizarCompra()">Finalizar Compra</button> 
+    </div>
+      <script>
+        function obterCarrinho() {
+          return JSON.parse(localStorage.getItem('carrinho')) || [];
+        }
+      
+        function salvarCarrinho(carrinho) {
+          localStorage.setItem('carrinho', JSON.stringify(carrinho));
+        }
+      
+        // 👉 FUNÇÃO FALTANTE: ADICIONAR AO CARRINHO
+        function adicionarAoCarrinho(nome, preco) {
+          let carrinho = obterCarrinho();
+      
+          const itemExistente = carrinho.find(item => item.nome === nome);
+          if (itemExistente) {
+            itemExistente.quantidade += 1;
+          } else {
+            carrinho.push({ nome, preco, quantidade: 1 });
+          }
+      
+          salvarCarrinho(carrinho);
+          atualizarCarrinhoSidebar();
+        }
+      
+        function abrirCarrinho() {
+          document.getElementById('carrinho-sidebar').classList.add('aberto');
+          atualizarCarrinhoSidebar();
+        }
+      
+        function fecharCarrinho() {
+          document.getElementById('carrinho-sidebar').classList.remove('aberto');
+        }
+      
+        function atualizarCarrinhoSidebar() {
+  const carrinho = obterCarrinho();
+  const carrinhoItens = document.getElementById('carrinho-itens');
+  const carrinhoTotal = document.getElementById('carrinho-total');
+  const quantidadeCarrinho = document.getElementById('quantidade-carrinho');
 
+  carrinhoItens.innerHTML = '';
+  let total = 0;
+  let quantidadeTotal = 0;
+
+  carrinho.forEach((item, index) => {
+    const subtotal = item.preco * item.quantidade;
+    total += subtotal;
+    quantidadeTotal += item.quantidade;
+
+    // Aqui colocamos uma imagem genérica, mas você pode associar a correta usando o nome
+    let imagem = '';
+    if (item.nome === 'Legado Imperial') imagem = '../imgs/legadoImperial.jpg';
+    if (item.nome === 'Bravura Noturna') imagem = '../imgs/bravuraNoturna.jpg';
+    if (item.nome === 'Vento Selvagem') imagem = '../imgs/ventoSelvagem.jpg';
+
+    carrinhoItens.innerHTML += `
+      <div class="carrinho-item">
+        <img src="${imagem}" alt="${item.nome}">
+        <div class="carrinho-info">
+          <h4>${item.nome}</h4>
+          <p>R$${item.preco.toFixed(2)} x ${item.quantidade}</p>
+          <button onclick="removerDoCarrinho(${index})">Remover</button>
+        </div>
+      </div>
+    `;
+  });
+
+  carrinhoTotal.textContent = total.toFixed(2);
+  quantidadeCarrinho.textContent = quantidadeTotal;
+}
+
+      
+        function removerDoCarrinho(index) {
+          let carrinho = obterCarrinho();
+          carrinho.splice(index, 1);
+          salvarCarrinho(carrinho);
+          atualizarCarrinhoSidebar();
+        }
+      
+        document.addEventListener('DOMContentLoaded', atualizarCarrinhoSidebar);
+        function finalizarCompra() {
+  const carrinho = obterCarrinho();
+
+  if (carrinho.length === 0) {
+    alert("Seu carrinho está vazio!");
+    return;
+  }
+
+  const confirmacao = confirm("Deseja realmente finalizar a compra?");
+  if (confirmacao) {
+    localStorage.removeItem('carrinho');
+    alert("Compra finalizada com sucesso! Obrigado por comprar na Miguelardo.");
+    fecharCarrinho();
+    atualizarCarrinhoSidebar();
+  }
+}
+
+     </script>
 </body>
 
 </html>

@@ -129,7 +129,7 @@ button {
 }
 
 button:hover {
-  background-color: #2980b9;
+  background-color: #0000003d;
   transform: scale(1.03);
 }
 
@@ -190,12 +190,10 @@ body {
 }
 
 .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: center;
 }
 
 .logo {
@@ -218,18 +216,22 @@ body {
 .nav-links a {
   color: #3498db;
   text-decoration: none;
-  font-size: 28px;
-  transition: color 0.3s;
+  font-size: 18px;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: background-color 0.3s;
 }
 
 .nav-links li i {
-  font-size: 25px;
+  font-size: 17px;
   margin-right: 10px;
   color: #3498db;
+  
 }
 
 .nav-links li a:hover {
-  color: black;
+  background-color: #0000003d;
+  transform: scale(1.03);
 }
 
 .login-btn a {
@@ -239,10 +241,14 @@ body {
   border-radius: 5px;
   text-decoration: none;
   transition: background-color 0.3s;
+  transform: scale(1.03);
+
 }
 
 .login-btn a:hover {
   background-color: #c0392b;
+  transform: scale(1.03);
+
 }
 
 .folder {
@@ -295,7 +301,7 @@ body {
 
 .product-card:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .product-card img {
@@ -327,6 +333,7 @@ body {
 
 .product-card button:hover {
   background-color: #2980b9;
+  transform: scale(1.03);
 }
 
 .hero {
@@ -346,16 +353,175 @@ body {
 }
 
 
+.right-header {
+  display: flex;
+  align-items: center;
+  gap: 35px;
+}
+
+.cart-icon {
+  color: #3498db;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  position: relative;
+  font-size: 20px;
+  transition: background-color 0.3s;
+  transition: 0.5s ease;
+}
+
+.cart-icon:hover {
+  background-color: #0000003d;
+  transform: scale(1.03);
+}
+
+.cart-icon span {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 12px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+}
+
+
+#carrinho-sidebar {
+  position: fixed;
+  top: 0;
+  right: -400px;
+  width: 320px;
+  height: 100%;
+  background: #fff;
+  border-left: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0,0,0,0.2);
+  transition: right 0.3s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+}
+
+#carrinho-sidebar.aberto {
+  right: 0;
+}
+
+.carrinho-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.carrinho-header h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.fechar-btn {
+  all: unset;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #555;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.fechar-btn:hover {
+  color: #000;
+}
+
+.fechar-btn i {
+  font-size: 14px;
+}
+
+.total-carrinho {
+  font-weight: bold;
+  font-size: 16px;
+  margin-top: auto;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.finalizar-btn {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #3498db;
+  color: white;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+}
+
+.finalizar-btn:hover {
+  background-color: #2980b9;
+}
+
+
+.carrinho-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.carrinho-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.carrinho-info {
+  flex: 1;
+}
+
+.carrinho-info h4 {
+  margin: 0 0 5px;
+  font-size: 14px;
+}
+
+.carrinho-info p {
+  margin: 0;
+  font-size: 13px;
+}
+
+.carrinho-info button {
+  all: unset;
+  margin-top: 5px;
+  padding: 3px 8px;
+  font-size: 12px;
+  background: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
 /* 
   -------------------
   Sobre nós HTML
   -------------------
   */
-
+  .container-pessoa{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 70px;
+  }
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.637);
   max-width: 400px;
-  margin: auto;
   margin-top: 30px;
   margin-bottom: 30px;
   padding: 10px;
@@ -400,12 +566,6 @@ p {
   font-size: 22px;
   color: black;
 }
-
-button:hover,
-a:hover {
-  opacity: 0.7;
-}
-
 
 /* 
   -------------------
