@@ -40,15 +40,33 @@
   </header>
 
   <main>
-    <section class="text-home">
-      <h1>Nossa Loja</h1>
-      <p>
-        Na Miguelardo, acreditamos que o perfume é uma extensão da sua identidade.<br />
-        Nossa seleção traz fragrâncias exclusivas, perfeitas para expressar quem você é em qualquer ocasião.<br />
-        Descubra o perfume ideal e destaque-se com aromas sofisticados que fazem a diferença.<br />
-        Explore agora e encontre o seu favorito!
-      </p>
+    <section class="intro-home">
+      <div class="container-intro">
+        <h2>Bem-vindo à Miguelardo</h2>
+        <p>
+          Mais do que perfumes, criamos experiências. Aqui, cada fragrância é desenvolvida com exclusividade para
+          refletir presença, autenticidade e estilo. Navegue pelo nosso catálogo e descubra aromas únicos, criados para
+          quem não se contenta com o comum.
+        </p>
+      </div>
+
+      <section class="intro-home">
+        <div class="container-intro">
+          <h2>Por que escolher a Miguelardo?</h2>
+          <p>
+            Ao comprar na Miguelardo, você escolhe exclusividade, autenticidade e qualidade. Nossos perfumes são
+            desenvolvidos e fabricados internamente, com fórmulas próprias e fragrâncias únicas que você não encontra em
+            nenhum outro lugar.
+          </p>
+          <p>
+            Trabalhamos com vendas 100% online, oferecendo praticidade, agilidade na entrega e uma experiência segura do
+            início ao fim. Se você busca um perfume que represente sua identidade, a Miguelardo é o seu lugar.
+          </p>
+        </div>
+      </section>
+
     </section>
+
   </main>
 
   <footer>
@@ -69,57 +87,57 @@
     function obterCarrinho() {
       return JSON.parse(localStorage.getItem('carrinho')) || [];
     }
-  
+
     function salvarCarrinho(carrinho) {
       localStorage.setItem('carrinho', JSON.stringify(carrinho));
     }
-  
+
     // 👉 FUNÇÃO FALTANTE: ADICIONAR AO CARRINHO
     function adicionarAoCarrinho(nome, preco) {
       let carrinho = obterCarrinho();
-  
+
       const itemExistente = carrinho.find(item => item.nome === nome);
       if (itemExistente) {
         itemExistente.quantidade += 1;
       } else {
         carrinho.push({ nome, preco, quantidade: 1 });
       }
-  
+
       salvarCarrinho(carrinho);
       atualizarCarrinhoSidebar();
     }
-  
+
     function abrirCarrinho() {
       document.getElementById('carrinho-sidebar').classList.add('aberto');
       atualizarCarrinhoSidebar();
     }
-  
+
     function fecharCarrinho() {
       document.getElementById('carrinho-sidebar').classList.remove('aberto');
     }
-  
+
     function atualizarCarrinhoSidebar() {
-const carrinho = obterCarrinho();
-const carrinhoItens = document.getElementById('carrinho-itens');
-const carrinhoTotal = document.getElementById('carrinho-total');
-const quantidadeCarrinho = document.getElementById('quantidade-carrinho');
+      const carrinho = obterCarrinho();
+      const carrinhoItens = document.getElementById('carrinho-itens');
+      const carrinhoTotal = document.getElementById('carrinho-total');
+      const quantidadeCarrinho = document.getElementById('quantidade-carrinho');
 
-carrinhoItens.innerHTML = '';
-let total = 0;
-let quantidadeTotal = 0;
+      carrinhoItens.innerHTML = '';
+      let total = 0;
+      let quantidadeTotal = 0;
 
-carrinho.forEach((item, index) => {
-const subtotal = item.preco * item.quantidade;
-total += subtotal;
-quantidadeTotal += item.quantidade;
+      carrinho.forEach((item, index) => {
+        const subtotal = item.preco * item.quantidade;
+        total += subtotal;
+        quantidadeTotal += item.quantidade;
 
-// Aqui colocamos uma imagem genérica, mas você pode associar a correta usando o nome
-let imagem = '';
-if (item.nome === 'Legado Imperial') imagem = '../imgs/legadoImperial.jpg';
-if (item.nome === 'Bravura Noturna') imagem = '../imgs/bravuraNoturna.jpg';
-if (item.nome === 'Vento Selvagem') imagem = '../imgs/ventoSelvagem.jpg';
+        // Aqui colocamos uma imagem genérica, mas você pode associar a correta usando o nome
+        let imagem = '';
+        if (item.nome === 'Legado Imperial') imagem = '../imgs/legadoImperial.jpg';
+        if (item.nome === 'Bravura Noturna') imagem = '../imgs/bravuraNoturna.jpg';
+        if (item.nome === 'Vento Selvagem') imagem = '../imgs/ventoSelvagem.jpg';
 
-carrinhoItens.innerHTML += `
+        carrinhoItens.innerHTML += `
   <div class="carrinho-item">
     <img src="${imagem}" alt="${item.nome}">
     <div class="carrinho-info">
@@ -129,39 +147,39 @@ carrinhoItens.innerHTML += `
     </div>
   </div>
 `;
-});
+      });
 
-carrinhoTotal.textContent = total.toFixed(2);
-quantidadeCarrinho.textContent = quantidadeTotal;
-}
+      carrinhoTotal.textContent = total.toFixed(2);
+      quantidadeCarrinho.textContent = quantidadeTotal;
+    }
 
-  
+
     function removerDoCarrinho(index) {
       let carrinho = obterCarrinho();
       carrinho.splice(index, 1);
       salvarCarrinho(carrinho);
       atualizarCarrinhoSidebar();
     }
-  
+
     document.addEventListener('DOMContentLoaded', atualizarCarrinhoSidebar);
     function finalizarCompra() {
-  const carrinho = obterCarrinho();
+      const carrinho = obterCarrinho();
 
-  if (carrinho.length === 0) {
-    alert("Seu carrinho está vazio!");
-    return;
-  }
+      if (carrinho.length === 0) {
+        alert("Seu carrinho está vazio!");
+        return;
+      }
 
-  const confirmacao = confirm("Deseja realmente finalizar a compra?");
-  if (confirmacao) {
-    localStorage.removeItem('carrinho');
-    alert("Compra finalizada com sucesso! Obrigado por comprar na Miguelardo.");
-    fecharCarrinho();
-    atualizarCarrinhoSidebar();
-  }
-}
+      const confirmacao = confirm("Deseja realmente finalizar a compra?");
+      if (confirmacao) {
+        localStorage.removeItem('carrinho');
+        alert("Compra finalizada com sucesso! Obrigado por comprar na Miguelardo.");
+        fecharCarrinho();
+        atualizarCarrinhoSidebar();
+      }
+    }
 
- </script>
+  </script>
 </body>
 
 </html>
